@@ -1,12 +1,18 @@
+import NoResults from '../components/NoResults';
+import VideoCard from '../components/VideoCard';
 import { getTopic, getPosts } from '../lib/api';
-import { Video } from '../lib/types';
+import { Post } from '../lib/types';
 
-const Home = ({ videos }: { videos: Video[] }) => {
-	console.log({ videos });
+const Home = ({ posts }: { posts: Post[] }) => {
+	console.log({ posts });
 
 	return (
 		<div className='flex flex-col gap-10 videos h-full'>
-			<h1>Hello Mom!</h1>
+			{posts.length ? (
+				posts?.map((post: Post) => <VideoCard post={post} isShowingOnHome key={post._id} />)
+			) : (
+				<NoResults text={`No Videos`} />
+			)}
 		</div>
 	);
 };
@@ -21,6 +27,6 @@ export const getServerSideProps = async ({ query: { topic } }: { query: { topic:
 	// }
 
 	return {
-		props: { videos: res }
+		props: { posts: res }
 	};
 };
