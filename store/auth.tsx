@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { getAllUsers } from '../lib/api';
+import { getUsers } from '../lib/api';
 
 const authStore = (set: any) => ({
 	userProfile: null,
@@ -10,7 +10,7 @@ const authStore = (set: any) => ({
 	removeUser: () => set({ userProfile: null }),
 
 	fetchAllUsers: async () => {
-		const data = await getAllUsers();
+		const data = await getUsers();
 
 		set({ allUsers: data });
 	}

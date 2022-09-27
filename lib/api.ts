@@ -21,8 +21,14 @@ export const createPost = async (doc: any) => {
 	return res.data;
 };
 
-export const getAllUsers = async () => {
+export const getUsers = async () => {
 	const res = await axios.get(`${BASE_URL}/api/users`);
+
+	return res.data;
+};
+
+export const createComment = async (postId: string, payload: any) => {
+	const res = await axios.put(`${BASE_URL}/api/post/${postId}`, payload);
 	return res.data;
 };
 

@@ -6,10 +6,13 @@ import { ImCancelCircle } from 'react-icons/im';
 import Footer from './Footer';
 import Discover from './Discover';
 import SuggestedAccounts from './SuggestedAccounts';
+import useAuthStore from '../store/auth';
 
 const Sidebar = () => {
 	const [showSidebar, setShowSidebar] = useState(true);
 	const { pathname } = useRouter();
+
+	const { fetchAllUsers, allUsers }: any = useAuthStore();
 
 	/* eslint-disable max-len */
 	const activeLink =
@@ -39,7 +42,7 @@ const Sidebar = () => {
 					</div>
 
 					<Discover />
-					<SuggestedAccounts />
+					<SuggestedAccounts fetchAllUsers={fetchAllUsers} allUsers={allUsers} />
 					<Footer />
 				</div>
 			)}

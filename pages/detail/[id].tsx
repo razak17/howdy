@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GoVerified } from 'react-icons/go';
 import Image from 'next/image';
@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { MdOutlineCancel } from 'react-icons/md';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
-import { getPost, likePost } from '../../lib/api';
+
+import { createComment, getPost, likePost } from '../../lib/api';
 import useAuthStore from '../../store/auth';
 import { Post } from '../../lib/types';
 import Comments from '../../components/Comments';
@@ -51,8 +52,20 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 		}
 	};
 
-	const addComment = async (e: { preventDefault: () => void }) => {
-		// pass
+	const addComment = async (e: FormEvent<Element>) => {
+		e.preventDefault();
+
+		if (comment) {
+			setIsPostingComment(true);
+			const data = await createComment(post._id, {
+				userId: userProfile._id,
+				comment: comment.trim()
+			});
+
+			setPost({ ...post, comments: data.comments });
+			setComment('');
+			setIsPostingComment(false);
+		}
 	};
 
 	if (!post) return null;
@@ -133,7 +146,13 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 							/>
 						)}
 					</div>
-					<Comments />
+					<Comments
+						comment={comment}
+						setComment={setComment}
+						addComment={addComment}
+						comments={post.comments}
+						isPostingComment={isPostingComment}
+					/>
 				</div>
 			</div>
 		</div>
