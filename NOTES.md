@@ -4,4 +4,8 @@
   yarn add -D @fsouza/prettierd eslint_d eslint-config-prettier
 
 - Main Dependencies
-  yarn add axios react-query @hookform/resolvers zod @react-oauth/google @sanity/client gapi-script react-google-login react-icons uuidv4 zustand
+  yarn add axios react-query @hookform/resolvers zod @react-oauth/google @sanity/client gapi-script react-google-login react-icons uuidv4 zustand react-hook-form
+
+- Tailwind Dependencies
+  yarn add -D postcss tailwindcss autoprefixer
+  npx tailwindcss init -p
