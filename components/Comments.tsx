@@ -23,7 +23,7 @@ interface IComment {
 	postedBy: { _ref?: string; _id?: string };
 }
 
-const Comment = ({ allUsers, item }: { allUsers: any; item: IComment }) => (
+const Comment = ({ allUsers, item }: { allUsers: IUser[]; item: IComment }) => (
 	<>
 		{allUsers?.map(
 			(user: IUser, idx: number) =>
@@ -57,7 +57,7 @@ const Comment = ({ allUsers, item }: { allUsers: any; item: IComment }) => (
 );
 
 const Comments = ({ comment, setComment, addComment, comments, isPostingComment }: IProps) => {
-	const { allUsers, userProfile }: any = useAuthStore();
+	const { allUsers, userProfile } = useAuthStore();
 
 	/* eslint-disable max-len */
 	return (

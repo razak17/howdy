@@ -16,7 +16,7 @@ const Upload = () => {
 	const [videoAsset, setVideoAsset] = useState<SanityAssetDocument | undefined>();
 	const [wrongFileType, setWrongFileType] = useState<Boolean>(false);
 
-	const userProfile: any = useAuthStore((state) => state.userProfile);
+	const userProfile: any  = useAuthStore((state) => state.userProfile);
 	const router = useRouter();
 
 	useEffect(() => {

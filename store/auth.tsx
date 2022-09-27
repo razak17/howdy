@@ -1,12 +1,13 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getUsers } from '../lib/api';
+import { IUser } from '../lib/types';
 
 const authStore = (set: any) => ({
 	userProfile: null,
 	allUsers: [],
 
-	addUser: (user: any) => set({ userProfile: user }),
+	addUser: (user: IUser) => set({ userProfile: user }),
 	removeUser: () => set({ userProfile: null }),
 
 	fetchAllUsers: async () => {

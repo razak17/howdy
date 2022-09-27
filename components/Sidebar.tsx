@@ -12,7 +12,7 @@ const Sidebar = () => {
 	const [showSidebar, setShowSidebar] = useState(true);
 	const { pathname } = useRouter();
 
-	const { fetchAllUsers, allUsers }: any = useAuthStore();
+	const { fetchAllUsers, allUsers } = useAuthStore();
 
 	/* eslint-disable max-len */
 	const activeLink =

@@ -15,10 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	} else if (req.method === 'PUT') {
 		const { comment, userId } = req.body;
 
-		const { id }: any = req.query;
+		const { id }  = req.query;
 
 		const data = await client
-			.patch(id)
+			.patch(id as string)
 			.setIfMissing({ comments: [] })
 			.insert('after', 'comments[-1]', [
 				{

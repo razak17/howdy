@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react';
 import { MdFavorite } from 'react-icons/md';
-import { NextPage } from 'next';
 import useAuthStore from '../store/auth';
 
+interface ILike {
+	postedBy: {
+		_id: string;
+		userName: string;
+		image: string;
+	};
+	_ref?: string;
+	_key?: string;
+}
+
 interface IProps {
-	likes: any;
+	likes: ILike[];
 	flex: string;
 	handleLike: () => void;
 	handleDislike: () => void;
 }
 
-const LikeButton: NextPage<IProps> = ({ likes, flex, handleLike, handleDislike }) => {
+const LikeButton = ({ likes, flex, handleLike, handleDislike }: IProps) => {
 	const [alreadyLiked, setAlreadyLiked] = useState(false);
 	const { userProfile }: any = useAuthStore();
-	let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
+	let filterLikes = likes?.filter((item) => item._ref === userProfile?._id);
+
+	console.log({ likes });
 
 	useEffect(() => {
 		if (filterLikes?.length > 0) {

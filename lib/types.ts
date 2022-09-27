@@ -1,4 +1,5 @@
 export interface Post {
+	_id: string;
 	caption: string;
 	video: {
 		asset: {
@@ -6,7 +7,6 @@ export interface Post {
 			url: string;
 		};
 	};
-	_id: string;
 	postedBy: {
 		_id: string;
 		userName: string;
@@ -35,3 +35,21 @@ export interface IUser {
 	userName: string;
 	image: string;
 }
+
+export type PostDoc = {
+	_type: string;
+	caption: string;
+	video: {
+		_type: string;
+		asset: {
+			_type: string;
+			_ref: string;
+		};
+	};
+	userId: any;
+	postedBy: {
+		_type: string;
+		_ref: any;
+	};
+	topic: String;
+};
