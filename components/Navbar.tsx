@@ -8,11 +8,20 @@ import { IoMdAdd } from 'react-icons/io';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
 import Logo from '../public/logo.png';
+import { IUser } from '../lib/types';
+import { createOrGetUser } from '../lib/api';
+import useAuthStore from '../store/auth';
 
 const Navbar = () => {
+	const [user, setUser] = useState<IUser | null>();
 	const [searchValue, setSearchValue] = useState('');
+	const { userProfile, addUser, removeUser } = useAuthStore();
 
 	const router = useRouter();
+
+	useEffect(() => {
+		setUser(userProfile);
+	}, [userProfile]);
 
 	const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -43,7 +52,45 @@ const Navbar = () => {
 					</button>
 				</form>
 			</div>
-			<div></div>
+			<div>
+				{user ? (
+					<div className='flex gap-5 md:gap-10'>
+						<Link href='/upload'>
+							<button className='border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2'>
+								<IoMdAdd className='text-xl' /> <span className='hidden md:block'>Upload </span>
+							</button>
+						</Link>
+						{user.image && (
+							<Link href={`/profile/${user._id}`}>
+								<div>
+									<Image
+										className='rounded-full cursor-pointer'
+										src={user.image}
+										alt='user'
+										width={40}
+										height={40}
+									/>
+								</div>
+							</Link>
+						)}
+						<button
+							type='button'
+							className=' border-2 p-2 rounded-full cursor-pointer outline-none shadow-md'
+							onClick={() => {
+								googleLogout();
+								removeUser();
+							}}
+						>
+							<AiOutlineLogout color='red' fontSize={21} />
+						</button>
+					</div>
+				) : (
+					<GoogleLogin
+						onSuccess={(response) => createOrGetUser(response, addUser)}
+						onError={() => console.log('Login Failed')}
+					/>
+				)}
+			</div>
 		</div>
 	);
 };
