@@ -47,6 +47,11 @@ export const getUser = async (userId: string) => {
 	return res.data;
 };
 
+export const getSearchResult = async (searchQuery: string) => {
+	const res = await axios.get(`${BASE_URL}/api/search/${searchQuery}`);
+	return res.data;
+};
+
 export const createOrGetUser = async (
 	response: CredentialResponse,
 	/* eslint-disable-next-line no-unused-vars */

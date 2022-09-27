@@ -20,8 +20,6 @@ const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
 		users = users.filter((user) => user._id !== userProfile?._id);
 	}
 
-	console.log({ users, userProfile });
-
 	useEffect(() => {
 		fetchAllUsers();
 	}, [fetchAllUsers]);

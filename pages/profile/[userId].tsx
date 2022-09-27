@@ -22,8 +22,6 @@ const Profile = ({ data }: IProps) => {
 	const videos = showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
 	const liked = !showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
 
-	console.log({ data });
-
 	useEffect(() => {
 		const fetchVideos = async () => {
 			if (showUserVideos) {
@@ -87,6 +85,8 @@ const Profile = ({ data }: IProps) => {
 	);
 };
 
+export default Profile;
+
 export const getServerSideProps = async ({
 	params: { userId }
 }: {
@@ -98,4 +98,3 @@ export const getServerSideProps = async ({
 		props: { data: data }
 	};
 };
-export default Profile;
