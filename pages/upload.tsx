@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
-import { topics } from '../lib/constants';
+import { BASE_URL, topics } from '../lib/constants';
 import useAuthStore from '../store/auth';
 import { client } from '../lib/client';
 
@@ -49,10 +49,42 @@ const Upload = () => {
 		}
 	};
 
-	const handlePost = async () => {};
+	const handlePost = async () => {
+		if (caption && videoAsset?._id && topic) {
+			setSavingPost(true);
 
-	const handleDiscard = () => {};
+			const doc = {
+				_type: 'post',
+				caption,
+				video: {
+					_type: 'file',
+					asset: {
+						_type: 'reference',
+						_ref: videoAsset?._id
+					}
+				},
+				userId: userProfile?._id,
+				postedBy: {
+					_type: 'postedBy',
+					_ref: userProfile?._id
+				},
+				topic
+			};
 
+			await axios.post(`${BASE_URL}/api/post`, doc);
+
+			router.push('/');
+		}
+	};
+
+	const handleDiscard = () => {
+		setSavingPost(false);
+		setVideoAsset(undefined);
+		setCaption('');
+		setTopic('');
+	};
+
+	/* eslint-disable max-len */
 	return (
 		<div className='flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center'>
 			<div className=' bg-white rounded-lg xl:h-[80vh] flex gap-6 flex-wrap justify-center items-center p-14 pt-6'>

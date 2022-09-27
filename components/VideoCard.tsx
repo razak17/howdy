@@ -59,6 +59,7 @@ const VideoCard = ({
 		);
 	}
 
+	/* eslint-disable max-len */
 	return (
 		<div className='flex flex-col border-b-2 border-gray-200 pb-6'>
 			<div>
