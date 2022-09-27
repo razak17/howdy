@@ -10,7 +10,7 @@
 		"no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
 		"no-underscore-dangle": [
 			"error",
-			{ "allow": ["_d", "_dh", "_h", "_id", "_m", "_n", "_t", "_text"] }
+			{ "allow": ["_d", "_dh", "_h", "_id", "_m", "_n", "_t", "_text", "_ref"] }
 		],
 		"max-len": [1, { "code": 100 }]
 	}

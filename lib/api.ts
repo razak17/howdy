@@ -25,6 +25,12 @@ export const getAllUsers = async () => {
 	const res = await axios.get(`${BASE_URL}/api/users`);
 	return res.data;
 };
+
+export const likePost = async (payload: any) => {
+	const res = await axios.put(`${BASE_URL}/api/like`, payload);
+	return res.data;
+};
+
 export const createOrGetUser = async (response: any, addUser: any) => {
 	var base64Url = response.credential.split('.')[1];
 	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { MdOutlineCancel } from 'react-icons/md';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
-import { getPost } from '../../lib/api';
+import { getPost, likePost } from '../../lib/api';
 import useAuthStore from '../../store/auth';
 import { Post } from '../../lib/types';
 import Comments from '../../components/Comments';
@@ -42,7 +42,14 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 	}, [post, isVideoMuted]);
 
 	const handleLike = async (like: boolean) => {
-		// pass
+		if (userProfile) {
+			const data = await likePost({
+				userId: userProfile._id,
+				postId: post._id,
+				like
+			});
+			setPost({ ...post, likes: data.likes });
+		}
 	};
 
 	const addComment = async (e: { preventDefault: () => void }) => {
@@ -55,6 +62,7 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 
 	return (
 		<div className='flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap'>
+			{/* eslint-disable-next-line max-len */}
 			<div className='relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center'>
 				<div className='opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50'>
 					<p className='cursor-pointer ' onClick={() => router.back()}>
@@ -104,6 +112,7 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 								src={post.postedBy?.image}
 							/>
 							<div>
+								{/* eslint-disable-next-line max-len */}
 								<div className='text-xl font-bold lowercase tracking-wider flex gap-2 items-center justify-center'>
 									{post.postedBy?.userName.replace(/\s+/g, '')}{' '}
 									<GoVerified className='text-blue-400 text-xl' />
@@ -115,7 +124,16 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 					<div className='px-10'>
 						<p className=' text-md text-gray-600'>{post.caption}</p>
 					</div>
-					<div className='mt-10 px-10'>{userProfile && <LikeButton />}</div>
+					<div className='mt-10 px-10'>
+						{userProfile && (
+							<LikeButton
+								likes={post.likes}
+								flex='flex'
+								handleLike={() => handleLike(true)}
+								handleDislike={() => handleLike(false)}
+							/>
+						)}
+					</div>
 					<Comments />
 				</div>
 			</div>
