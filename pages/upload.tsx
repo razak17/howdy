@@ -6,6 +6,7 @@ import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
 import { topics } from '../lib/constants';
 import useAuthStore from '../store/auth';
+import { client } from '../lib/client';
 
 const Upload = () => {
 	const [caption, setCaption] = useState('');
@@ -22,7 +23,31 @@ const Upload = () => {
 		if (!userProfile) router.push('/');
 	}, [userProfile, router]);
 
-	const uploadVideo = async (e: React.ChangeEvent<HTMLInputElement>) => {};
+	const uploadVideo = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) {
+			const selectedFile = e.target.files[0];
+			const fileTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+
+			// uploading asset to sanity
+			if (fileTypes.includes(selectedFile.type)) {
+				setWrongFileType(false);
+				setLoading(true);
+
+				client.assets
+					.upload('file', selectedFile, {
+						contentType: selectedFile.type,
+						filename: selectedFile.name
+					})
+					.then((data) => {
+						setVideoAsset(data);
+						setLoading(false);
+					});
+			} else {
+				setLoading(false);
+				setWrongFileType(true);
+			}
+		}
+	};
 
 	const handlePost = async () => {};
 
