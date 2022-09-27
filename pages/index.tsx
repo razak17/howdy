@@ -4,8 +4,6 @@ import { getTopic, getPosts } from '../lib/api';
 import { Post } from '../lib/types';
 
 const Home = ({ posts }: { posts: Post[] }) => {
-	// console.log({ posts });
-
 	return (
 		<div className='flex flex-col gap-10 videos h-full'>
 			{posts.length ? (
@@ -22,9 +20,9 @@ export default Home;
 export const getServerSideProps = async ({ query: { topic } }: { query: { topic: string } }) => {
 	let data = await getPosts();
 
-	// if (topic) {
-	// 	data = getTopic(topic);
-	// }
+	if (topic) {
+		data = await getTopic(topic);
+	}
 
 	return {
 		props: { posts: data }
