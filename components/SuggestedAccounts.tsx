@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { GoVerified } from 'react-icons/go';
 
 import { IUser } from '../lib/types';
+import useAuthStore from '../store/auth';
 
 interface IProps {
 	fetchAllUsers: () => void;
@@ -12,7 +13,14 @@ interface IProps {
 }
 
 const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
-	const users = allUsers.sort(() => 0.5 - Math.random()).slice(0, allUsers.length);
+	const { userProfile }: any = useAuthStore();
+	let users = allUsers.sort(() => 0.5 - Math.random()).slice(0, allUsers.length);
+
+	if (userProfile) {
+		users = users.filter((user) => user._id !== userProfile?._id);
+	}
+
+	console.log({ users, userProfile });
 
 	useEffect(() => {
 		fetchAllUsers();
