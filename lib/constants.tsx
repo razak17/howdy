@@ -46,8 +46,8 @@ export const footerList1 = [
 	'Newsroom',
 	'Store',
 	'Contact',
-	'Carrers',
-	'ByteDance',
+	'Careers',
+	'Privacy Policy',
 	'Creator Directory'
 ];
 export const footerList2 = [
