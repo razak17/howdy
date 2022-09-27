@@ -6,6 +6,11 @@ export const getPosts = async () => {
 	return res.data;
 };
 
+export const getPost = async (id: string) => {
+	const res = await axios.get(`${BASE_URL}/api/post/${id}`);
+	return res.data;
+};
+
 export const getTopic = async (topic: string) => {
 	const res = await axios.get(`${BASE_URL}/api/discover/${topic}`);
 	return res.data;
