@@ -11,6 +11,15 @@ export const getTopic = async (topic: string) => {
 	return res.data;
 };
 
+export const createPost = async (doc: any) => {
+	const res = await axios.post(`${BASE_URL}/api/post`, doc);
+	return res.data;
+};
+
+export const getAllUsers = async () => {
+	const res = await axios.get(`${BASE_URL}/api/users`);
+	return res.data;
+};
 export const createOrGetUser = async (response: any, addUser: any) => {
 	var base64Url = response.credential.split('.')[1];
 	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

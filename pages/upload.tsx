@@ -3,10 +3,10 @@ import { SanityAssetDocument } from '@sanity/client';
 import { useRouter } from 'next/router';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
-import axios from 'axios';
-import { BASE_URL, topics } from '../lib/constants';
+import { topics } from '../lib/constants';
 import useAuthStore from '../store/auth';
 import { client } from '../lib/client';
+import { createPost } from '../lib/api';
 
 const Upload = () => {
 	const [caption, setCaption] = useState('');
@@ -71,7 +71,7 @@ const Upload = () => {
 				topic
 			};
 
-			await axios.post(`${BASE_URL}/api/post`, doc);
+			await createPost(doc);
 
 			router.push('/');
 		}

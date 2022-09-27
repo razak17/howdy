@@ -1,13 +1,8 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { client } from '../../../lib/client';
 import { allPostsQuery } from '../../../lib/queries';
 
-type Data = {
-	name: string;
-};
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'GET') {
 		const query = allPostsQuery();
 
@@ -18,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		const doc = req.body;
 
 		client.create(doc).then(() => {
-			res.status(200).json('video created');
+			res.status(201).send('video created');
 		});
 	}
 }
