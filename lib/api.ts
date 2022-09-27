@@ -42,6 +42,11 @@ export const likePost = async (payload: { userId: string; postId: string; like: 
 	return res.data;
 };
 
+export const getUser = async (userId: string) => {
+	const res = await axios.get(`${BASE_URL}/api/profile/${userId}`);
+	return res.data;
+};
+
 export const createOrGetUser = async (
 	response: CredentialResponse,
 	/* eslint-disable-next-line no-unused-vars */

@@ -70,8 +70,6 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 
 	if (!post) return null;
 
-	console.log({ post });
-
 	return (
 		<div className='flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap'>
 			{/* eslint-disable-next-line max-len */}

@@ -13,7 +13,7 @@ const VideoCard = ({
 	isShowingOnHome
 }: {
 	post: Post;
-	isShowingOnHome: boolean;
+	isShowingOnHome?: boolean;
 }) => {
 	const [playing, setPlaying] = useState(false);
 	const [isHover, setIsHover] = useState(false);

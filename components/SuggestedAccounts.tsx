@@ -12,8 +12,6 @@ interface IProps {
 }
 
 const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
-	console.log({ allUsers });
-
 	const users = allUsers.sort(() => 0.5 - Math.random()).slice(0, allUsers.length);
 
 	useEffect(() => {

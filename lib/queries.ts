@@ -59,6 +59,7 @@ export const postDetailQuery = (postId: string | string[]) => {
 };
 
 export const searchPostsQuery = (searchTerm: string | string[]) => {
+	/* eslint-disable-next-line max-len */
 	const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
     _id,
      caption,
