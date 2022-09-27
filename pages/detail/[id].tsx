@@ -14,8 +14,8 @@ import LikeButton from '../../components/LikeButton';
 
 const Detail = ({ postDetails }: { postDetails: Post }) => {
 	const [post, setPost] = useState(postDetails);
-	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
+	const [isPlaying, setIsPlaying] = useState<boolean>(true);
+	const [isVideoMuted, setIsVideoMuted] = useState<boolean>(true);
 	const [isPostingComment, setIsPostingComment] = useState<boolean>(false);
 	const [comment, setComment] = useState<string>('');
 
@@ -36,6 +36,7 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 
 	useEffect(() => {
 		if (post && videoRef?.current) {
+			videoRef.current.play();
 			videoRef.current.muted = isVideoMuted;
 		}
 	}, [post, isVideoMuted]);
