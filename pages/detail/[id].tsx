@@ -36,7 +36,6 @@ const Detail = ({ postDetails }: { postDetails: Post }) => {
 
 	useEffect(() => {
 		if (post && videoRef?.current) {
-			videoRef.current.play();
 			videoRef.current.muted = isVideoMuted;
 		}
 	}, [post, isVideoMuted]);
