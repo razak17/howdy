@@ -46,7 +46,7 @@ const Navbar = () => {
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
 						className='bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full  md:top-0'
-						placeholder='Search accounts and videos'
+						placeholder='Search videos and users'
 					/>
 					<button className='absolute md:right-5 right-6 top-4 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400'>
 						<BiSearch />
