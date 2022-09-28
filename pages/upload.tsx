@@ -55,7 +55,7 @@ const Upload = () => {
 
 			const doc = {
 				_type: 'post',
-				caption,
+				caption: caption.trim(),
 				video: {
 					_type: 'file',
 					asset: {
