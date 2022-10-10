@@ -1,5 +1,7 @@
 ## Howdy
-videos sharing app created with react and sanity
+videos sharing app created with React and Sanity
+
+![tiktik](https://user-images.githubusercontent.com/52210954/194866718-a3453bed-055f-4c2a-b9e4-fafa7635f6a8.png)
 
 ## Technologies used:
 - Nextjs
