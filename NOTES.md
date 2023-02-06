@@ -9,3 +9,9 @@
 - Tailwind Dependencies
   yarn add -D postcss tailwindcss autoprefixer
   npx tailwindcss init -p
+
+  - Sanity Setup
+    cd sanity-backend
+    sanity start
+
+  \*\* update API CORS origin
